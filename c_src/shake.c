@@ -61,7 +61,7 @@
 #   define le64toh(x) OSSwapLittleToHostInt64(x)
 #elif defined(__NetBSD__) || defined(__FreeBSD__) || defined(__DragonFly__)
 #   include <sys/endian.h>
-#   define le64toh(x) letoh64(x)
+#   define le64toh(x) ((u_int64_t)(x))
 #elif defined(_WIN16) || defined(_WIN32) || defined(_WIN64) || defined(__WINDOWS__)
 #   include <winsock2.h>
 #   include <sys/param.h>
@@ -77,6 +77,7 @@
 #else
 #   error platform not supported
 #endif
+
 
 /* The internal, non-opaque definition of the sponge struct. */
 typedef union {
