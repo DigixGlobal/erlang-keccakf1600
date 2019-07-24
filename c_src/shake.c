@@ -61,7 +61,7 @@
 #   define le64toh(x) OSSwapLittleToHostInt64(x)
 #elif defined(__NetBSD__) || defined(__FreeBSD__) || defined(__DragonFly__)
 #   include <sys/endian.h>
-#   define le64toh(x) ((u_int64_t)(x))
+#   // define le64toh(x) ((u_int64_t)(x))  // Unnecessary redefine
 #elif defined(_WIN16) || defined(_WIN32) || defined(_WIN64) || defined(__WINDOWS__)
 #   include <winsock2.h>
 #   include <sys/param.h>
@@ -264,7 +264,7 @@ void sponge_hash (
 	
 #define DEFSHA3(n) \
 	const struct kparams_s SHA3_##n##_params_s = \
-		{ 0, FLAG_ABSORBING, 200-n/4, 0, 0x06, 0x80, n/8, 0 };
+		{ 0, FLAG_ABSORBING, 200-n/4, 0, 0x01, 0x80, n/8, 0 };
 
 size_t sponge_default_output_bytes (
 	const keccak_sponge_t s
